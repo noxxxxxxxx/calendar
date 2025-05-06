@@ -80,7 +80,7 @@
 }
 
 .nc-picker .nc-sibling,
-.in-range {
+.nc-picker .in-range {
   background-color: var(--nc-brand-600);
   opacity: 0.3;
   color: #fff;
@@ -175,10 +175,6 @@
 .nc-picker thead tr:first-of-type th {
   cursor: pointer;
 }
-
-// .nc-picker thead tr:first-of-type th:hover {
-//   background: var(--gray-50);
-// }
 
 .nc-picker tfoot {
   border-top: 1px solid #f9f9f9;
