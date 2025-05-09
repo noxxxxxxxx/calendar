@@ -69,28 +69,35 @@ export const Day: FC<DayProps> = (props) => {
     }
 
     let className = 'nc-day'
+
     if (date.isBefore(startOfMonth)) {
       className += ' nc-before'
     } else if (date.isAfter(endOfMonth)) {
       className += ' nc-after'
     }
 
-    if (selectedDate?.isBefore(siblingDate, 'day')) {
-      if (date.isBefore(siblingDate, 'day') && date.isAfter(selectedDate, 'day')) {
+    if (selectedDate && siblingDate) {
+      const [startDate, endDate] = selectedDate.isBefore(siblingDate, 'day')
+        ? [selectedDate, siblingDate]
+        : [siblingDate, selectedDate]
+
+      if (
+        date.isSame(startDate, 'day') || // 如果是开始/结束日
+        date.isSame(endDate, 'day') || // 或者同一天
+        (date.isAfter(startDate, 'day') && date.isBefore(endDate, 'day')) // 或者在范围内
+      ) {
         className += ' in-range'
       }
     }
-    if (siblingDate && selectedDate?.isAfter(siblingDate, 'day')) {
-      if (siblingDate && date.isAfter(siblingDate, 'day') && date.isBefore(selectedDate, 'day')) {
-        className += ' in-range'
-      }
-    }
+
     if (siblingDate?.isSame(date, 'day')) {
       className += ' nc-sibling'
     }
+
     if (selectedDate?.isSame(date, 'day')) {
       className += ' nc-active'
     }
+
     if (date.isSame(today, 'day')) {
       className += ' nc-today'
     }

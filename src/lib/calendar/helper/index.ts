@@ -100,9 +100,9 @@ export const formatDate = (
 /* 获取当前本地日期 */
 export const getLocalDate = (timezoneOffset?: number) => {
   if (timezoneOffset !== undefined) {
-    return dayjs().utcOffset(timezoneOffset)
+    return dayjs().utcOffset(timezoneOffset).startOf('day')
   }
-  return dayjs()
+  return dayjs().startOf('day')
 }
 
 /* 获取本地化的星期 */
@@ -148,4 +148,17 @@ export const isAMPM = (date: Dayjs | undefined, timeFormat?: string | boolean) =
 export const getAMPM = (date: Dayjs | undefined, timeFormat?: string | boolean) => {
   if (!date) return ''
   return dayjs(date).format(getTimeFormat(timeFormat))
+}
+
+/**
+ * 将dayjs转成带时区的
+ * @param value 日期
+ * @param timezoneOffset 时区偏移量
+ * @returns
+ */
+export const withOffsetDayjs = (value: Dayjs | string, timezoneOffset?: number) => {
+  if (timezoneOffset !== undefined) {
+    return dayjs(value).utcOffset(timezoneOffset)
+  }
+  return dayjs(value)
 }

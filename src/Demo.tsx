@@ -9,7 +9,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import utc from 'dayjs/plugin/utc'
 import { useEffect, useState } from 'react'
 import { DateTime, DynamicType, Type } from './components/datetime'
-import Calendar, { ViewMode } from './lib'
+import Calendar from './lib'
 // import { ViewMode } from './types'
 // import { Calendar, ViewMode } from './react-canendar.js'
 dayjs.extend(utc)
@@ -70,7 +70,8 @@ function Demo() {
             onChange={(v) => {
               console.log(v)
             }}
-            initialViewMode={ViewMode.Year}
+            // initialViewMode={ViewMode.Year}
+            showTime={true}
             // onClose={(v) => console.log(v, 'close')}
           />
         </div>

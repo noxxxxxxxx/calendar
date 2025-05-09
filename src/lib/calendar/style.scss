@@ -1,5 +1,7 @@
 :root {
   --nc-brand-600: #216fed;
+  --nc-brand-700: #99b4f3;
+  --nc-neutral-200: #f2f3f8;
   --nc-neutral-300: #ebedf0;
   --nc-neutral-700: #a6aebb;
 }
@@ -79,14 +81,19 @@
   position: relative;
 }
 
-.nc-picker .nc-sibling,
 .nc-picker .in-range {
-  background-color: var(--nc-brand-600);
-  opacity: 0.3;
+  background-color: var(--nc-neutral-200);
+  &:hover {
+    background-color: var(--nc-neutral-200);
+  }
+}
+
+/* 开始结束相邻节点 */
+.nc-picker .nc-sibling {
+  background-color: var(--nc-brand-700);
   color: #fff;
   &:hover {
-    background-color: var(--nc-brand-600) !important;
-    opacity: 0.3;
+    background-color: var(--nc-brand-700);
     color: #fff;
   }
 }
@@ -113,10 +120,11 @@
 .nc-picker .dow,
 .nc-picker .nc-disabled,
 .nc-picker .nc-disabled:hover {
-  background: none;
+  background-color: transparent;
   color: #d3d3d3;
   cursor: not-allowed;
   text-shadow: none;
+  opacity: 1;
 }
 
 .nc-picker span.nc-disabled,

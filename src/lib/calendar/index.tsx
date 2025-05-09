@@ -1,5 +1,5 @@
 import { NextView, ViewToMethod } from '@/lib/calendar/constant'
-import { formatDate, getDateFormat, getTimeFormat } from '@/lib/calendar/helper'
+import { getDateFormat, getTimeFormat, withOffsetDayjs } from '@/lib/calendar/helper'
 import useClickOutside from '@/lib/calendar/helper/useClickoutside'
 import { Input } from '@/lib/calendar/input'
 import { Props, State } from '@/lib/calendar/type'
@@ -44,13 +44,14 @@ const Calendar: FC<Props> = (props) => {
     onNavigateBack,
     timeConstraints,
   } = props
+  // console.info('calendar', props)
 
   const [state, setState] = useState<State>({
     open: open ?? false,
-    selectedDate: dayjs(formatDate(value || initialValue, timezoneOffset, dateFormat, timeFormat)),
+    selectedDate: value ?? initialValue ?? withOffsetDayjs(dayjs(), timezoneOffset),
     inputValue: undefined,
     currentView: viewMode || initialViewMode,
-    viewDate: dayjs(formatDate(value || initialValue, timezoneOffset, dateFormat, timeFormat)),
+    viewDate: value ?? initialValue ?? withOffsetDayjs(dayjs(), timezoneOffset),
     ready: false,
   })
   const ref = useRef<HTMLDivElement>(null)
@@ -234,7 +235,7 @@ const Calendar: FC<Props> = (props) => {
 
   useEffect(() => {
     if (value) {
-      const selectedDate = dayjs(formatDate(value, timezoneOffset, dateFormat, timeFormat))
+      const selectedDate = value // 外部传入的dayjs 直接使用，默认认为已经经过时区处理
       setState({
         ...state,
         selectedDate,

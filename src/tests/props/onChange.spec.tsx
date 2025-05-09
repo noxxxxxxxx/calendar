@@ -15,7 +15,7 @@ describe('onChange', () => {
       />,
     )
     fireEvent.click(container.querySelector('input')!)
-    fireEvent.click(container.querySelector('[data-value="4"]')!)
+    fireEvent.click(container.querySelector('td[data-value="4"]')!)
     expect(onChange).toBeCalledTimes(1)
     expect(onChange).toHaveBeenCalledWith(expect.any(dayjs))
 
